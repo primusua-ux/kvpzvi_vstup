@@ -1841,3 +1841,57 @@ body.light-theme .btn-check-test:hover {
 .btn-next-step {
     margin-top: 1rem;
 }
+
+/* ==========================================================================
+   Visual Accent for Main Action Buttons (External Forms & Sites)
+   ========================================================================== */
+@keyframes pulse-gold-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(205, 162, 80, 0.6);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(205, 162, 80, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(205, 162, 80, 0);
+    }
+}
+
+.btn-action-accent {
+    position: relative;
+    border: 2px solid var(--accent-gold) !important;
+    animation: pulse-gold-glow 2s infinite !important;
+    transition: all var(--transition-normal);
+}
+
+.btn-action-accent:hover {
+    background-color: var(--accent-gold) !important;
+    color: #0e110e !important;
+    border-color: var(--accent-gold) !important;
+    box-shadow: 0 0 20px rgba(205, 162, 80, 0.7) !important;
+    transform: translateY(-2px) scale(1.015);
+}
+
+.btn-action-accent .fa-up-right-from-square {
+    margin-left: 8px;
+    font-size: 0.85em;
+    transition: transform var(--transition-fast);
+}
+
+.btn-action-accent:hover .fa-up-right-from-square {
+    transform: translate(2px, -2px);
+}
+
+/* Ensure text inside method buttons turns dark when parent is hovered */
+.btn-action-accent:hover h5,
+.btn-action-accent:hover span,
+.btn-action-accent:hover .arrow-icon,
+.btn-action-accent:hover i {
+    color: #0e110e !important;
+}
+
+.btn-action-accent:hover .method-num {
+    background-color: #1b221b !important;
+    color: var(--accent-gold) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
