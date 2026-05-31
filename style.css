@@ -1895,3 +1895,52 @@ body.light-theme .btn-check-test:hover {
     color: var(--accent-gold) !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
 }
+
+/* Print Requirements Box */
+.print-requirements {
+    margin-top: 0.8rem;
+    padding: 0.8rem 1rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid var(--accent-gold);
+    border-radius: 4px;
+}
+
+body.light-theme .print-requirements {
+    background-color: rgba(0, 0, 0, 0.015);
+}
+
+.print-requirements h6 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.print-requirements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.print-requirements li {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.4;
+}
+
+.print-requirements li i {
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+    width: 14px;
+    text-align: center;
+}
