@@ -83,12 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetPane.classList.add('active');
             }
 
-            // Scroll to stepper top if off screen
-            const stepsSection = document.getElementById('steps');
-            const rect = stepsSection.getBoundingClientRect();
-            if (rect.top < 0) {
+            // Scroll so that the stepper navigation remains at the top of the viewport
+            const stepperNav = document.querySelector('.stepper-nav');
+            if (stepperNav) {
+                const targetScrollY = stepperNav.getBoundingClientRect().top + window.scrollY - 95;
                 window.scrollTo({
-                    top: stepsSection.offsetTop - 85,
+                    top: targetScrollY,
                     behavior: 'smooth'
                 });
             }
