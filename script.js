@@ -14,24 +14,30 @@ document.addEventListener('DOMContentLoaded', () => {
         updateThemeIcon(savedTheme);
     }
 
-    themeToggle.addEventListener('click', () => {
-        if (body.classList.contains('dark-theme')) {
-            body.classList.replace('dark-theme', 'light-theme');
-            localStorage.setItem('theme', 'light-theme');
-            updateThemeIcon('light-theme');
-        } else {
-            body.classList.replace('light-theme', 'dark-theme');
-            localStorage.setItem('theme', 'dark-theme');
-            updateThemeIcon('dark-theme');
-        }
-    });
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-theme')) {
+                body.classList.replace('dark-theme', 'light-theme');
+                localStorage.setItem('theme', 'light-theme');
+                updateThemeIcon('light-theme');
+            } else {
+                body.classList.replace('light-theme', 'dark-theme');
+                localStorage.setItem('theme', 'dark-theme');
+                updateThemeIcon('dark-theme');
+            }
+        });
+    }
 
     function updateThemeIcon(theme) {
-        const icon = themeToggle.querySelector('i');
-        if (theme === 'light-theme') {
-            icon.className = 'fa-solid fa-sun';
-        } else {
-            icon.className = 'fa-solid fa-moon';
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+                if (theme === 'light-theme') {
+                    icon.className = 'fa-solid fa-sun';
+                } else {
+                    icon.className = 'fa-solid fa-moon';
+                }
+            }
         }
     }
 
@@ -42,22 +48,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navMenu = document.getElementById('navMenu');
 
-    mobileMenuBtn.addEventListener('click', () => {
-        navMenu.classList.toggle('open');
-        const icon = mobileMenuBtn.querySelector('i');
-        if (navMenu.classList.contains('open')) {
-            icon.className = 'fa-solid fa-xmark';
-        } else {
-            icon.className = 'fa-solid fa-bars';
-        }
-    });
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                if (navMenu.classList.contains('open')) {
+                    icon.className = 'fa-solid fa-xmark';
+                } else {
+                    icon.className = 'fa-solid fa-bars';
+                }
+            }
+        });
+    }
 
     // Close menu when clicking link
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            navMenu.classList.remove('open');
-            mobileMenuBtn.querySelector('i').className = 'fa-solid fa-bars';
+            if (navMenu) navMenu.classList.remove('open');
+            if (mobileMenuBtn) {
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) icon.className = 'fa-solid fa-bars';
+            }
         });
     });
 
@@ -179,9 +192,9 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuestionIndex = 0;
         quizScore = 0;
         if (quizIntro) quizIntro.style.display = 'none';
-        quizContainer.style.display = 'block';
-        quizResults.style.display = 'none';
-        nextQuestionBtn.style.display = 'none';
+        if (quizContainer) quizContainer.style.display = 'block';
+        if (quizResults) quizResults.style.display = 'none';
+        if (nextQuestionBtn) nextQuestionBtn.style.display = 'none';
         loadQuestion();
     }
 
@@ -190,23 +203,25 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update progress bar
         const progressPercentage = ((currentQuestionIndex) / quizQuestions.length) * 100;
-        quizProgressFill.style.width = `${progressPercentage}%`;
+        if (quizProgressFill) quizProgressFill.style.width = `${progressPercentage}%`;
         
-        questionTitle.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
-        quizOptions.innerHTML = '';
-        nextQuestionBtn.style.display = 'none';
-
-        currentQuestion.options.forEach((option, index) => {
-            const btn = document.createElement('button');
-            btn.className = 'quiz-opt-btn';
-            btn.textContent = option;
-            btn.addEventListener('click', () => selectOption(index));
-            quizOptions.appendChild(btn);
-        });
+        if (questionTitle) questionTitle.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
+        if (quizOptions) {
+            quizOptions.innerHTML = '';
+            currentQuestion.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-opt-btn';
+                btn.textContent = option;
+                btn.addEventListener('click', () => selectOption(index));
+                quizOptions.appendChild(btn);
+            });
+        }
+        if (nextQuestionBtn) nextQuestionBtn.style.display = 'none';
     }
 
     function selectOption(selectedIdx) {
         const currentQuestion = quizQuestions[currentQuestionIndex];
+        if (!quizOptions) return;
         const optionButtons = quizOptions.querySelectorAll('.quiz-opt-btn');
         
         // Disable all option buttons
@@ -214,49 +229,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Highlight correct and incorrect choices
         if (selectedIdx === currentQuestion.correctIndex) {
-            optionButtons[selectedIdx].classList.add('correct');
+            if (optionButtons[selectedIdx]) optionButtons[selectedIdx].classList.add('correct');
             quizScore++;
         } else {
-            optionButtons[selectedIdx].classList.add('incorrect');
-            optionButtons[currentQuestion.correctIndex].classList.add('correct');
+            if (optionButtons[selectedIdx]) optionButtons[selectedIdx].classList.add('incorrect');
+            if (optionButtons[currentQuestion.correctIndex]) optionButtons[currentQuestion.correctIndex].classList.add('correct');
         }
 
         // Show Next button
-        nextQuestionBtn.style.display = 'inline-flex';
+        if (nextQuestionBtn) nextQuestionBtn.style.display = 'inline-flex';
     }
 
-    nextQuestionBtn.addEventListener('click', () => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < quizQuestions.length) {
-            loadQuestion();
-        } else {
-            showQuizResults();
-        }
-    });
+    if (nextQuestionBtn) {
+        nextQuestionBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showQuizResults();
+            }
+        });
+    }
 
     function showQuizResults() {
-        quizProgressFill.style.width = '100%';
-        quizContainer.style.display = 'none';
-        quizResults.style.display = 'block';
+        if (quizProgressFill) quizProgressFill.style.width = '100%';
+        if (quizContainer) quizContainer.style.display = 'none';
+        if (quizResults) quizResults.style.display = 'block';
         
-        quizScoreNumber.textContent = quizScore;
+        if (quizScoreNumber) quizScoreNumber.textContent = quizScore;
         
-        if (quizScore === 5) {
-            quizResultMessage.textContent = "Чудовий результат! 5/5";
-            quizResultText.textContent = "Ви чудово володієте базовими знаннями з курсу «Захист України». Ви готові до офіційного тестування!";
-        } else if (quizScore >= 3) {
-            quizResultMessage.textContent = "Хороший результат! " + quizScore + "/5";
-            quizResultText.textContent = "Ваших знань достатньо для подолання прохідного порогу, але ви можете ще покращити свій результат.";
-        } else {
-            quizResultMessage.textContent = "Спробуйте ще! " + quizScore + "/5";
-            quizResultText.textContent = "Матеріали шкільного курсу варто трішки повторити. Ознайомтеся з базовими темами та спробуйте пройти тест ще раз.";
+        if (quizResultMessage && quizResultText) {
+            if (quizScore === 5) {
+                quizResultMessage.textContent = "Чудовий результат! 5/5";
+                quizResultText.textContent = "Ви чудово володієте базовими знаннями з курсу «Захист України». Ви готові до офіційного тестування!";
+            } else if (quizScore >= 3) {
+                quizResultMessage.textContent = "Хороший результат! " + quizScore + "/5";
+                quizResultText.textContent = "Ваших знань достатньо для подолання прохідного порогу, але ви можете ще покращити свій результат.";
+            } else {
+                quizResultMessage.textContent = "Спробуйте ще! " + quizScore + "/5";
+                quizResultText.textContent = "Матеріали шкільного курсу варто трішки повторити. Ознайомтеся з базовими темами та спробуйте пройти тест ще раз.";
+            }
         }
     }
 
     if (startQuizBtn) {
         startQuizBtn.addEventListener('click', startQuiz);
     }
-    restartQuizBtn.addEventListener('click', startQuiz);
+    if (restartQuizBtn) {
+        restartQuizBtn.addEventListener('click', startQuiz);
+    }
 
     /* ==========================================================================
        Audit UI Enhancements Handlers
@@ -265,7 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Step Pane Transitional Navigation
     const nextStepButtons = document.querySelectorAll('.btn-next-step');
     nextStepButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
             const nextStepNum = button.getAttribute('data-next');
             const targetTab = document.querySelector(`.step-nav-item[data-step="${nextStepNum}"]`);
             if (targetTab) {
@@ -285,10 +307,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             const icon = btn.querySelector('i');
-            if (btn.classList.contains('checked')) {
-                icon.className = 'fa-solid fa-square-check';
-            } else {
-                icon.className = 'fa-regular fa-square';
+            if (icon) {
+                if (btn.classList.contains('checked')) {
+                    icon.className = 'fa-solid fa-square-check';
+                } else {
+                    icon.className = 'fa-regular fa-square';
+                }
             }
         });
     });
