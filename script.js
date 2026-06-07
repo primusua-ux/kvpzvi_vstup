@@ -97,68 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ==========================================================================
-       Filename Generator Calculator
-       ========================================================================== */
-    const inputSurname = document.getElementById('inputSurname');
-    const inputName = document.getElementById('inputName');
-    const inputPatronymic = document.getElementById('inputPatronymic');
-    const inputBirthdate = document.getElementById('inputBirthdate');
-    const filenameDisplay = document.getElementById('filenameDisplay');
-    const copyFilenameBtn = document.getElementById('copyFilenameBtn');
-
-    function updateFilename() {
-        const surname = cleanString(inputSurname.value);
-        const name = cleanString(inputName.value);
-        const patronymic = cleanString(inputPatronymic.value);
-        const dob = cleanString(inputBirthdate.value);
-
-        if (!surname && !name && !patronymic && !dob) {
-            filenameDisplay.textContent = 'Прізвище_Імʼя_ПоБатькові_ДатаНародження.docx';
-            return;
-        }
-
-        const parts = [];
-        if (surname) parts.push(surname);
-        if (name) parts.push(name);
-        if (patronymic) parts.push(patronymic);
-        if (dob) parts.push(dob);
-
-        filenameDisplay.textContent = parts.join('_') + '.docx';
-    }
-
-    function cleanString(str) {
-        // Strip out slashes, backslashes, double quotes, question marks, asterisks, pipe, angle brackets
-        // Keep spaces, dots, dashes, Cyrillic letters, numbers
-        return str.trim()
-            .replace(/[\\/:*?"<>|]/g, '') // remove invalid filename characters
-            .replace(/\s+/g, '');         // remove spaces for strict matching
-    }
-
-    [inputSurname, inputName, inputPatronymic, inputBirthdate].forEach(input => {
-        input.addEventListener('input', updateFilename);
-    });
-
-    // Copy to clipboard
-    copyFilenameBtn.addEventListener('click', () => {
-        const textToCopy = filenameDisplay.textContent;
-        if (textToCopy === 'Прізвище_Імʼя_ПоБатькові_ДатаНародження.docx') return;
-
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            const icon = copyFilenameBtn.querySelector('i');
-            icon.className = 'fa-solid fa-check';
-            copyFilenameBtn.classList.add('success');
-            
-            setTimeout(() => {
-                icon.className = 'fa-regular fa-copy';
-                copyFilenameBtn.classList.remove('success');
-            }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy text: ', err);
-        });
-    });
-
-
-    /* ==========================================================================
        Interactive Defense of Ukraine Quiz
        ========================================================================== */
     const quizQuestions = [
