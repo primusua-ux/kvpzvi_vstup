@@ -847,6 +847,12 @@ body.light-theme .step-nav-item:hover {
     gap: 3rem;
 }
 
+.step-pane-interactive {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .step-badge {
     display: inline-block;
     background-color: var(--accent-gold);
@@ -1198,113 +1204,7 @@ body.light-theme .step-nav-item:hover {
     font-size: 1.1rem;
 }
 
-.quiz-progress {
-    height: 6px;
-    background-color: var(--bg-tertiary);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background-color: var(--accent-green);
-    border-radius: 3px;
-    transition: width var(--transition-normal);
-}
-
-.question-title {
-    font-family: var(--font-title);
-    font-weight: 700;
-    font-size: 1.15rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-}
-
-.quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    margin-bottom: 1.5rem;
-}
-
-.quiz-opt-btn {
-    background-color: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    padding: 0.9rem 1.2rem;
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-family: var(--font-sans);
-    font-size: 0.92rem;
-    font-weight: 500;
-    text-align: left;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-.quiz-opt-btn:hover {
-    border-color: var(--border-color-hover);
-    background-color: rgba(255, 255, 255, 0.02);
-}
-
-.quiz-opt-btn.correct {
-    background-color: rgba(76, 175, 80, 0.15);
-    border-color: var(--success-color);
-    color: #ffffff;
-}
-
-body.light-theme .quiz-opt-btn.correct {
-    background-color: rgba(46, 125, 50, 0.1);
-    color: var(--success-color);
-}
-
-.quiz-opt-btn.incorrect {
-    background-color: rgba(244, 67, 54, 0.15);
-    border-color: var(--error-color);
-    color: #ffffff;
-}
-
-body.light-theme .quiz-opt-btn.incorrect {
-    background-color: rgba(198, 40, 40, 0.1);
-    color: var(--error-color);
-}
-
-.quiz-results {
-    text-align: center;
-    padding: 1.5rem 0;
-    animation: fade-in 0.5s ease;
-}
-
-.score-radial {
-    width: 90px;
-    height: 90px;
-    background-color: var(--bg-tertiary);
-    border: 3px solid var(--accent-gold);
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-title);
-    font-weight: 900;
-    font-size: 2rem;
-    color: var(--text-primary);
-    margin-bottom: 1.5rem;
-}
-
-.score-radial span {
-    color: var(--accent-gold);
-}
-
-.quiz-results h4 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-}
-
-.quiz-results p {
-    font-size: 0.88rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem !important;
-}
+/* Step 3 Quiz widget styles removed */
 
 /* Step 4 VLC */
 .vlk-steps {
@@ -1824,20 +1724,7 @@ body.light-theme .btn-check-test:hover {
     opacity: 0.65;
     border-color: var(--border-color);
 }
-.quiz-intro {
-    text-align: center;
-    padding: 1rem 0;
-    animation: fade-in 0.5s ease;
-}
-.quiz-intro-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-.quiz-intro h4 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-    font-family: var(--font-title);
-}
+/* Quiz intro styles removed */
 .btn-next-step {
     margin-top: 1rem;
 }
