@@ -193,6 +193,21 @@ body.light-theme .btn-outline:hover {
     width: 100%;
 }
 
+.btn-next-step {
+    background-color: rgba(var(--accent-gold-rgb), 0.05) !important;
+    border: 1px solid rgba(var(--accent-gold-rgb), 0.3) !important;
+    color: var(--accent-gold) !important;
+    box-shadow: none !important;
+}
+
+.btn-next-step:hover {
+    background-color: rgba(var(--accent-gold-rgb), 0.15) !important;
+    border-color: var(--accent-gold) !important;
+    color: var(--accent-gold) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(var(--accent-gold-rgb), 0.15) !important;
+}
+
 .glow-effect::after {
     content: '';
     position: absolute;
